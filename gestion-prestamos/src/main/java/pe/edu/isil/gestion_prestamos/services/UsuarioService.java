@@ -28,6 +28,9 @@ public class UsuarioService {
 }
 
     public Usuario registrar(Usuario usuario) {
+        if(usuario == null) {
+            throw new IllegalArgumentException("El Usuario puede ser nulo");
+        }
         return usuarioRepository.save(usuario);
     }
 }

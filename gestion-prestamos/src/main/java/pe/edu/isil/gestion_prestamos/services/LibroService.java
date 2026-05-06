@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,10 @@ public class LibroService {
         List<Libro> librosValidos = new ArrayList<>();
 
         try {
-            String nombre = archivo.getOriginalFilename().toLowerCase();
+            String originalFilename = archivo.getOriginalFilename();
+            Objects.requireNonNull(originalFilename, "El nombre del archivo no puede ser nulo");
+
+            String nombre = originalFilename.toLowerCase();
             List<Libro> parseados = nombre.endsWith(".csv")
                 ? csvParser.parsear(archivo)
                 : excelParser.parsear(archivo);
