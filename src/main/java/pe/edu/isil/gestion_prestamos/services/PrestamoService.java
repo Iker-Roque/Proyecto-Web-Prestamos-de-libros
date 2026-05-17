@@ -21,7 +21,10 @@ public class PrestamoService {
 
     @Transactional
     public Prestamo registrarPrestamo(PrestamoRequestDTO dto) {
+        
+
         // 1. Validar existencia del libro
+        @SuppressWarnings("null")
         Libro libro = libroRepository.findById(dto.getLibroId())
                 .orElseThrow(() -> new RuntimeException("El libro solicitado no existe."));
 
