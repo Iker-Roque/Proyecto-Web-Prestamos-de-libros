@@ -42,6 +42,8 @@ public class PrestamoService {
         prestamo.setLibroId(dto.getLibroId());
         prestamo.setUsuarioId(dto.getUsuarioId());
 
+        prestamo.setDniUsuario(dto.getDniUsuario());
+
         return prestamoRepository.save(prestamo);
     }
 }

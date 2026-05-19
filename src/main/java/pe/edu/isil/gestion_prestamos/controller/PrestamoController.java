@@ -16,16 +16,14 @@ import java.util.UUID;
 @RequestMapping("/api/prestamos")
 @CrossOrigin(origins = "*") 
 public class PrestamoController {
-
     
     @Autowired
     private PrestamoService prestamoService;
-
     
     @Autowired
     private PrestamoRepository prestamoRepository;
-
     
+    // 1. POST: Crear un nuevo préstamo
     @PostMapping
     public ResponseEntity<?> crearPrestamo(@RequestBody PrestamoRequestDTO dto) {
         try {
@@ -35,7 +33,8 @@ public class PrestamoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+    
+    // 2. GET (Usuario): Obtener préstamos de un usuario específico
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<?> obtenerMisPrestamos(@PathVariable UUID usuarioId) {
         try {
@@ -43,6 +42,17 @@ public class PrestamoController {
             return ResponseEntity.ok(misPrestamos);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al obtener préstamos: " + e.getMessage());
+        }
+    }
+
+    // 3. GET (Administrador): Obtener TODOS los préstamos
+    @GetMapping
+    public ResponseEntity<?> obtenerTodosLosPrestamos() {
+        try {
+            List<Prestamo> todosLosPrestamos = prestamoRepository.findAll();
+            return ResponseEntity.ok(todosLosPrestamos);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error al obtener el historial general: " + e.getMessage());
         }
     }
 }

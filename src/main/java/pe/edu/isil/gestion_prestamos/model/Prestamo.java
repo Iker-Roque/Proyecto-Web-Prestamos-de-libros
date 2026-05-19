@@ -19,6 +19,10 @@ public class Prestamo {
     @Column(name = "usuario_id")
     private UUID usuarioId;
 
+    @Column(name = "dni_usuario")
+    private String dniUsuario;
+
+
     @Column(name = "fecha_prestamo", nullable = false, updatable = false)
     private LocalDateTime fechaPrestamo = LocalDateTime.now();
 
@@ -40,4 +44,7 @@ public class Prestamo {
 
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
+
+    public String getDniUsuario() { return dniUsuario; }
+    public void setDniUsuario(String dniUsuario) { this.dniUsuario = dniUsuario; }
 }
