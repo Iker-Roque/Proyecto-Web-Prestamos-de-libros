@@ -2,12 +2,12 @@ package pe.edu.isil.gestion_prestamos.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.UUID; 
+import java.util.UUID;
 
 @Entity
 @Table(name = "prestamos")
 public class Prestamo {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,9 +19,14 @@ public class Prestamo {
     @Column(name = "usuario_id")
     private UUID usuarioId;
 
+    
+
     @Column(name = "dni_usuario")
     private String dniUsuario;
 
+    @Column(name = "fecha_vencimiento")
+    private LocalDateTime fechaVencimiento;
+        
 
     @Column(name = "fecha_prestamo", nullable = false, updatable = false)
     private LocalDateTime fechaPrestamo = LocalDateTime.now();
@@ -30,21 +35,60 @@ public class Prestamo {
     private String estado = "solicitado";
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Long getLibroId() { return libroId; }
-    public void setLibroId(Long libroId) { this.libroId = libroId; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public UUID getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(UUID usuarioId) { this.usuarioId = usuarioId; }
+    public Long getLibroId() {
+        return libroId;
+    }
 
-    public LocalDateTime getFechaPrestamo() { return fechaPrestamo; }
-    public void setFechaPrestamo(LocalDateTime fechaPrestamo) { this.fechaPrestamo = fechaPrestamo; }
+    public void setLibroId(Long libroId) {
+        this.libroId = libroId;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public UUID getUsuarioId() {
+        return usuarioId;
+    }
 
-    public String getDniUsuario() { return dniUsuario; }
-    public void setDniUsuario(String dniUsuario) { this.dniUsuario = dniUsuario; }
+    public void setUsuarioId(UUID usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public LocalDateTime getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public LocalDateTime getFechaPrestamo() {
+        return fechaPrestamo;
+    }
+
+
+    public void setFechaPrestamo(LocalDateTime fechaPrestamo) {
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDniUsuario() {
+        return dniUsuario;
+    }
+
+    public void setDniUsuario(String dniUsuario) {
+        this.dniUsuario = dniUsuario;
+    }
 }
