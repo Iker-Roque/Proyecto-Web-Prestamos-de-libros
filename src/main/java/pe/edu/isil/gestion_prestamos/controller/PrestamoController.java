@@ -14,16 +14,16 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/prestamos")
-@CrossOrigin(origins = "*") 
+@CrossOrigin(origins = "*")
 public class PrestamoController {
-    
+
     @Autowired
     private PrestamoService prestamoService;
-    
+
     @Autowired
     private PrestamoRepository prestamoRepository;
-    
-    // 1. POST: Crear un nuevo préstamo
+
+    // POST: Crear un nuevo préstamo
     @PostMapping
     public ResponseEntity<?> crearPrestamo(@RequestBody PrestamoRequestDTO dto) {
         try {
@@ -33,8 +33,8 @@ public class PrestamoController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    
-    // 2. GET (Usuario): Obtener préstamos de un usuario específico
+
+    // GET (Usuario): Obtener préstamos de un usuario específico
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<?> obtenerMisPrestamos(@PathVariable UUID usuarioId) {
         try {
@@ -45,7 +45,7 @@ public class PrestamoController {
         }
     }
 
-    // 3. GET (Administrador): Obtener TODOS los préstamos
+    // GET (Administrador): Obtener TODOS los préstamos
     @GetMapping
     public ResponseEntity<?> obtenerTodosLosPrestamos() {
         try {
@@ -54,5 +54,15 @@ public class PrestamoController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error al obtener el historial general: " + e.getMessage());
         }
+    }
+
+    @PutMapping("/{id}/aprobar")
+    public ResponseEntity<Prestamo> aprobar(@PathVariable Long id) {
+        return ResponseEntity.ok(prestamoService.aprobarPrestamo(id));
+    }
+
+    @PutMapping("/{id}/rechazar")
+    public ResponseEntity<Prestamo> rechazar(@PathVariable Long id) {
+        return ResponseEntity.ok(prestamoService.rechazarPrestamo(id));
     }
 }
